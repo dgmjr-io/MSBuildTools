@@ -25,7 +25,7 @@ public sealed class GetCommandLineArgs : MSBTask, IEqualityComparer<string>
 {
     private static readonly string[] _argsToRemove = { "msbuild", "build", "pack", "restore", "clean", "test", "publish", "run", "dotnet" };
 
-    private string[] PropertiesToRemove = {
+    private readonly string[] PropertiesToRemove = {
         MSBuildToolsPath,
         MSBuildToolsPath32,
         MSBuildThisFileDirectory,
