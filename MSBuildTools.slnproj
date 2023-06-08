@@ -1,0 +1,23 @@
+<!--
+ * MSBuildTools.slnproj
+ *
+ *   Created: 2023-06-07-08:57:28
+ *   Modified: 2023-06-07-08:57:28
+ *
+ *   Author: David G. Moore, Jr. <david@dgmjr.io>
+ *
+ *   Copyright © 2022 - 2023 David G. Moore, Jr., All Rights Reserved
+ *      License: MIT (https://opensource.org/licenses/MIT)
+-->
+
+<Project Sdk="Microsoft.Build.Traversal">
+    <PropertyGroup>
+        <IncludeInSolutionFile>false</IncludeInSolutionFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="./src/Dgmjr.MSBuild.Extensions/Dgmjr.MSBuild.Extensions.csproj" />
+        <ProjectReference Include="./src/GetAllProperties/Dgmjr.MSBuild.Utils.GetAllProperties.csproj" />
+        <ProjectReference Include="./src/GetCommandLineArgs/GetCommandLineArgs.csproj" />
+        <ProjectReference Include="./src/MSBuild.DotNetCliTask/Dgmjr.MSBuild.Tasks.DotNetCliTask.csproj" />
+    </ItemGroup>
+</Project>

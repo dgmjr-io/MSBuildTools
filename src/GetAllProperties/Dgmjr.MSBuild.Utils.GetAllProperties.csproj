@@ -1,19 +1,21 @@
 <!--
- * GetAllProperties.csproj
- * 
- *   Created: 2023-01-24-03:30:59
- *   Modified: 2023-01-24-03:30:59
- * 
+ * Dgmjr.MSBuild.Utils.GetAllProperties.csproj
+ *
+ *   Created: 2023-03-12-08:29:04
+ *   Modified: 2023-06-08-12:02:49
+ *
  *   Author: David G. Moore, Jr. <david@dgmjr.io>
- *   
- *   Copyright © 2022-2023 David G. Moore, Jr., All Rights Reserved
+ *
+ *   Copyright © 2022 - 2023 David G. Moore, Jr., All Rights Reserved
  *      License: MIT (https://opensource.org/licenses/MIT)
 -->
+
 
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <PackageId>MSBuild.Extensions.GetAllProperties</PackageId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MSBuild.Usings" />
