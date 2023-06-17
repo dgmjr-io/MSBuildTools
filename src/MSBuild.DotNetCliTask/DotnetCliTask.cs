@@ -36,7 +36,7 @@ public class Dotnet : MSBTask
 
     public string? AssemblyName { get; set; }
 
-    public bool IgnoreExitCodes { get; set; } = false;
+    public bool IgnoreExitCodes { get; set; }
 
     public ITaskItem[] Properties { get; set; } = Array.Empty<ITaskItem>();
     public ITaskItem[] Targets { get; set; } = Array.Empty<ITaskItem>();
