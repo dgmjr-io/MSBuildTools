@@ -1,0 +1,17 @@
+<!--
+ * Dgmjr.MSBuildTools.csproj
+ *
+ *   Created: 2023-05-25-04:16:39
+ *   Modified: 2023-05-25-04:16:39
+ *
+ *   Author: David G. Moore, Jr. <david@dgmjr.io>
+ *
+ *   Copyright © 2022 - 2023 David G. Moore, Jr., All Rights Reserved
+ *      License: MIT (https://opensource.org/licenses/MIT)
+-->
+
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFrameworks>netstandard1.5;netstandard2.0;net6.0;net7.0</TargetFrameworks>
+    </PropertyGroup>
+</Project>

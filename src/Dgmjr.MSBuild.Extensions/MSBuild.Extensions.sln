@@ -1,0 +1,35 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSBuild.Extensions", "MSBuild.Extensions.csproj", "{13031CB4-E102-46F2-8D4F-593384DA4D58}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F60E8F36-895E-4AA5-9930-7019AFDD32C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Local|Any CPU = Local|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Staging|Any CPU = Staging|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Testing|Any CPU = Testing|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13031CB4-E102-46F2-8D4F-593384DA4D58}.Local|Any CPU.ActiveCfg = Local|Any CPU
+		{13031CB4-E102-46F2-8D4F-593384DA4D58}.Local|Any CPU.Build.0 = Local|Any CPU
+		{13031CB4-E102-46F2-8D4F-593384DA4D58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13031CB4-E102-46F2-8D4F-593384DA4D58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13031CB4-E102-46F2-8D4F-593384DA4D58}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
+		{13031CB4-E102-46F2-8D4F-593384DA4D58}.Staging|Any CPU.Build.0 = Staging|Any CPU
+		{13031CB4-E102-46F2-8D4F-593384DA4D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13031CB4-E102-46F2-8D4F-593384DA4D58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13031CB4-E102-46F2-8D4F-593384DA4D58}.Testing|Any CPU.ActiveCfg = Testing|Any CPU
+		{13031CB4-E102-46F2-8D4F-593384DA4D58}.Testing|Any CPU.Build.0 = Testing|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{13031CB4-E102-46F2-8D4F-593384DA4D58} = {F60E8F36-895E-4AA5-9930-7019AFDD32C7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5B3E7C80-E1D5-463C-84EB-7A2ECC189642}
+	EndGlobalSection
+EndGlobal
