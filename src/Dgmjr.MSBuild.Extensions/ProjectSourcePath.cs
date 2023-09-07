@@ -1,6 +1,7 @@
-global using static global::System.IO.Path;
 using System.Runtime.CompilerServices;
+
 using global::System;
+
 using static System.IO.Path;
 
 internal static class ProjectSourcePath
