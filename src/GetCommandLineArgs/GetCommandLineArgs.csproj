@@ -1,18 +1,18 @@
 <!--
  * GetCommandLineArgs.csproj
- * 
+ *
  *   Created: 2022-11-12-04:14:38
  *   Modified: 2022-11-12-04:14:41
- * 
+ *
  *   Author: David G. Moore, Jr. <david@dgmjr.io>
- *   
+ *
  *   Copyright © 2022-2023 David G. Moore, Jr., All Rights Reserved
  *      License: MIT (https://opensource.org/licenses/MIT)
 -->
 
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>netstandard2.0</TargetFramework>
         <OutputPath>lib/</OutputPath>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <Description>Provides a task and a target that put the command line arguments to the MSBuild process into the items and property "CommandLineArgs."</Description>
@@ -26,14 +26,14 @@
         <PackageReference Include="Microsoft.Build.Framework" PrivateAssets="None" />
         <PackageReference Include="Microsoft.Build" PrivateAssets="None" />
         <PackageReference Include="System.Runtime" />
-        <PackageReference Include="Dgmjr.MSBuild.Extensions" IncludeAssets="ContentFiles;Build" ExcludeAssets="Native;Lib;Compile;Analyzers" />
+        <PackageReference Include="Dgmjr.MSBuild.Extensions" IncludeAssets="Compile;Runtime;Lib" ExcludeAssets="Native;Lib;Compile;Analyzers;ContentFiles" />
     </ItemGroup>
     <ItemGroup Label="Global Usings">
         <Using Include="Microsoft.Build.Utilities.Task" Alias="MSBTask" />
     </ItemGroup>
     <ItemGroup>
-        <Content Include="./GetCommandLineArgs.targets" PackagePath="build/GetCommandLineArgs.targets" />
-        <Content Include="$(OutputPath)**/*" PackagePath="lib/%(RecursiveDir)%(Filename)%(Extension)" />
+        <Content Include="$(MSBuildProjectDirectory)/GetCommandLineArgs.targets" PackagePath="build/GetCommandLineArgs.targets" />
+        <Content Include="$(MSBuildProjectDirectory)/$(OutputPath)**/*" PackagePath="lib/%(RecursiveDir)%(Filename)%(Extension)" Exclude="$(MSBuildProjectDirectory)/$(OutputPath)**.nupkg" />
     </ItemGroup>
     <PropertyGroup>
         <GetCommandLineArgsAssemblyFile Condition="'$(MSBuildProjectName)' == 'GetCommandLineArgs'">$(MSBuildThisFileDirectory)./lib/GetCommandLineArgs.dll</GetCommandLineArgsAssemblyFile>

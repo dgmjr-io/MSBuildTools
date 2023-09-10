@@ -1121,30 +1121,74 @@
             <param name="obj">The object to get a hash code for.</param>
             <returns>A hash code for the specified object or if the object is the same as another object in the same language</returns>
         </member>
+        <member name="T:ThisAssembly">
+            <summary>Provides access to the current assembly information.</summary>
+        </member>
+        <member name="T:ThisAssembly.Git">
+            <summary>Provides access to the git information for the current assembly.</summary>
+        </member>
+        <member name="F:ThisAssembly.Git.IsDirty">
+            <summary>IsDirty: true</summary>
+        </member>
+        <member name="F:ThisAssembly.Git.IsDirtyString">
+            <summary>IsDirtyString: true</summary>
+        </member>
+        <member name="F:ThisAssembly.Git.RepositoryUrl">
+            <summary>Repository URL: </summary>
+        </member>
         <member name="F:ThisAssembly.Git.Branch">
-            <summary>
-            => @"main"
-            </summary>
+            <summary>Branch: main</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commit">
-            <summary>
-            => @"9004c5be23af4cff9de17a9585ac135da795c2cd"
-            </summary>
+            <summary>Commit: 54b1372</summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
-            <summary>
-            => @"9004c5be2"
-            </summary>
+            <summary>Sha: 54b1372d2dbb7468078d2ae0bca1c1fff9897655</summary>
         </member>
-        <member name="F:ThisAssembly.Git.Root">
-            <summary>
-            => @"/Users/david/GitHub/dgmjr-io/src/MSBuildTools/"
-            </summary>
+        <member name="F:ThisAssembly.Git.CommitDate">
+            <summary>Commit date: </summary>
         </member>
-        <member name="F:ThisAssembly.Git.Url">
-            <summary>
-            => @"https://github.com/dgmjr-io/MSBuildTools.git"
-            </summary>
+        <member name="F:ThisAssembly.Git.Commits">
+            <summary>Commits on top of base version: 14</summary>
+        </member>
+        <member name="F:ThisAssembly.Git.Tag">
+            <summary>Tag: </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.BaseTag">
+            <summary>Base tag: </summary>
+        </member>
+        <member name="T:ThisAssembly.Git.BaseVersion">
+            <summary>Provides access to the base version information used to determine the <see cref="T:ThisAssembly.Git.SemVer" />.</summary>      
+        </member>
+        <member name="F:ThisAssembly.Git.BaseVersion.Major">
+            <summary>Major: 0</summary>
+        </member>
+        <member name="F:ThisAssembly.Git.BaseVersion.Minor">
+            <summary>Minor: 0</summary>
+        </member>
+        <member name="F:ThisAssembly.Git.BaseVersion.Patch">
+            <summary>Patch: 0</summary>
+        </member>
+        <member name="T:ThisAssembly.Git.SemVer">
+            <summary>Provides access to SemVer information for the current assembly.</summary>
+        </member>
+        <member name="F:ThisAssembly.Git.SemVer.Major">
+            <summary>Major: 0</summary>
+        </member>
+        <member name="F:ThisAssembly.Git.SemVer.Minor">
+            <summary>Minor: 0</summary>
+        </member>
+        <member name="F:ThisAssembly.Git.SemVer.Patch">
+            <summary>Patch: 14</summary>
+        </member>
+        <member name="F:ThisAssembly.Git.SemVer.Label">
+            <summary>Label: </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.SemVer.DashLabel">
+            <summary>Label with dash prefix: </summary>
+        </member>
+        <member name="F:ThisAssembly.Git.SemVer.Source">
+            <summary>Source: Default</summary>
         </member>
     </members>
 </doc>

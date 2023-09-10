@@ -16,9 +16,12 @@ namespace Dgmjr.MSBuild.Tasks;
 using System;
 using System.IO;
 using System.Linq;
+
 using Dgmjr.MSBuild.Extensions;
+
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+
 using static Dgmjr.MSBuild.Constants.MSBuildPropertyNames;
 
 public sealed class GetCommandLineArgs : MSBTask, IEqualityComparer<string>
