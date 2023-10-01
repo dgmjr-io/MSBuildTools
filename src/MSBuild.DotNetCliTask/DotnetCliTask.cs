@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Xml.Linq;
+
 namespace Dgmjr.MSBuild.Tasks;
 
 using System.Diagnostics.Metrics;
@@ -15,10 +16,16 @@ public class Dotnet : MSBTask
     public ITaskItem[] Projects { get; set; } = Array.Empty<ITaskItem>();
 
     [Output]
-    public ITaskItem[] ExitCodes => _exitCodes.Select(kvp => new TaskItem(kvp.Key, new Dictionary<string, string>
-    {
-        ["ExitCode"] = kvp.Value.ToString(),
-    })).ToArray();
+    public ITaskItem[] ExitCodes =>
+        _exitCodes
+            .Select(
+                kvp =>
+                    new TaskItem(
+                        kvp.Key,
+                        new Dictionary<string, string> { ["ExitCode"] = kvp.Value.ToString(), }
+                    )
+            )
+            .ToArray();
 
     private IDictionary<string, int> _exitCodes;
 
@@ -112,7 +119,12 @@ public class Dotnet : MSBTask
 
         foreach (var project in Projects)
         {
-            Log.LogExternalProjectStarted($"Started {Command} of project {project.ItemSpec}...", Command, project.ItemSpec, Targets.Join(";"));
+            Log.LogExternalProjectStarted(
+                $"Started {Command} of project {project.ItemSpec}...",
+                Command,
+                project.ItemSpec,
+                Targets.Join(";")
+            );
             var psi = new ProcessStartInfo("dotnet", args.Join(" "))
             {
                 WorkingDirectory = project.GetMetadata("RootDir"),
@@ -135,7 +147,12 @@ public class Dotnet : MSBTask
                 // {
                 //     Log.LogError(error);
                 // }
-                Log.LogExternalProjectFinished($"Finished {Command} of project {project.ItemSpec}...", Command, project.ItemSpec, p.ExitCode == 0);
+                Log.LogExternalProjectFinished(
+                    $"Finished {Command} of project {project.ItemSpec}...",
+                    Command,
+                    project.ItemSpec,
+                    p.ExitCode == 0
+                );
                 if (p.ExitCode != 0 && !IgnoreExitCodes)
                 {
                     Log.LogError($"dotnet {Command} failed with exit code {p.ExitCode}.");
@@ -151,7 +168,6 @@ public class Dotnet : MSBTask
                 Log.LogErrorFromException(ex);
                 return false;
             }
-
         }
 
         return true;

@@ -26,9 +26,21 @@ using static Dgmjr.MSBuild.Constants.MSBuildPropertyNames;
 
 public sealed class GetCommandLineArgs : MSBTask, IEqualityComparer<string>
 {
-    private static readonly string[] _argsToRemove = { "msbuild", "build", "pack", "restore", "clean", "test", "publish", "run", "dotnet" };
+    private static readonly string[] _argsToRemove =
+    {
+        "msbuild",
+        "build",
+        "pack",
+        "restore",
+        "clean",
+        "test",
+        "publish",
+        "run",
+        "dotnet"
+    };
 
-    private readonly string[] PropertiesToRemove = {
+    private readonly string[] PropertiesToRemove =
+    {
         MSBuildToolsPath,
         MSBuildToolsPath32,
         MSBuildThisFileDirectory,
@@ -47,20 +59,28 @@ public sealed class GetCommandLineArgs : MSBTask, IEqualityComparer<string>
         MSBuildProjectFullPath
     };
 
-    private string[] ProjectFilePermutations => new[] {
-        BuildEngine.ProjectFileOfTaskNode,
-        Path.GetFileName(BuildEngine.ProjectFileOfTaskNode)
-    };
+    private string[] ProjectFilePermutations =>
+        new[]
+        {
+            BuildEngine.ProjectFileOfTaskNode,
+            Path.GetFileName(BuildEngine.ProjectFileOfTaskNode)
+        };
 
-    private string[] ArgsToRemove => _argsToRemove.Concat(PropertiesToRemove.Select(p => AllEvaluatedProperties[p])).Concat(ProjectFilePermutations).ToArray();
+    private string[] ArgsToRemove =>
+        _argsToRemove
+            .Concat(PropertiesToRemove.Select(p => AllEvaluatedProperties[p]))
+            .Concat(ProjectFilePermutations)
+            .ToArray();
 
     [Output]
     public ITaskItem[] CommandLineArgs { get; private set; } = Array.Empty<ITaskItem>();
+
     [Output]
     public string FullCommandLine { get; private set; } = string.Empty;
 
     private IDictionary<string, string>? _allEvaluatedProperties;
-    private IDictionary<string, string> AllEvaluatedProperties => _allEvaluatedProperties ??= this.GetAllEvaluatedProperties();
+    private IDictionary<string, string> AllEvaluatedProperties =>
+        _allEvaluatedProperties ??= this.GetAllEvaluatedProperties();
 
     /// <summary>
     /// Executes the task. This is where you get the command line arguments and properties to remove from the command line.
@@ -68,12 +88,18 @@ public sealed class GetCommandLineArgs : MSBTask, IEqualityComparer<string>
     /// <returns>True if the task executed successfully ; otherwise false. If false the task should be retried with another task</returns>
     public override bool Execute()
     {
-        var commandLineArgs = Environment.GetCommandLineArgs().Except(ArgsToRemove, this);//.Except(new[] { "/Users/david/GitHub/Dgmjr/libs/src/MSBuild.Utils/src/GetCommandLineArgs/GetCommandLineArgs.csproj" });
+        var commandLineArgs = Environment.GetCommandLineArgs().Except(ArgsToRemove, this); //.Except(new[] { "/Users/david/GitHub/Dgmjr/libs/src/MSBuild.Utils/src/GetCommandLineArgs/GetCommandLineArgs.csproj" });
         CommandLineArgs = commandLineArgs.Select(a => new TaskItem(a)).ToArray();
         FullCommandLine = string.Join(" ", Environment.GetCommandLineArgs());
         Log.LogMessage(MessageImportance.High, $"Full command line: *{FullCommandLine}*");
-        Log.LogMessage(MessageImportance.High, $"Command line args: {string.Join(" ", commandLineArgs)}");
-        Log.LogMessage(MessageImportance.High, $"Properties to remove: {string.Join(",\n", PropertiesToRemove.Select(p => $"{p}: {AllEvaluatedProperties[p]}"))}");
+        Log.LogMessage(
+            MessageImportance.High,
+            $"Command line args: {string.Join(" ", commandLineArgs)}"
+        );
+        Log.LogMessage(
+            MessageImportance.High,
+            $"Properties to remove: {string.Join(",\n", PropertiesToRemove.Select(p => $"{p}: {AllEvaluatedProperties[p]}"))}"
+        );
         return true;
     }
 
@@ -81,17 +107,16 @@ public sealed class GetCommandLineArgs : MSBTask, IEqualityComparer<string>
     /// <param name="x">The first to compare.</param>
     /// <param name="y">The second to compare.</param>
     /// <returns> true if the two specified instances are equal ; otherwise false</returns>
-    public bool Equals(string? x, string? y)
-        => x.Equals(y, StringComparison.OrdinalIgnoreCase) ||
-            x.EndsWith(y + ".exe", StringComparison.OrdinalIgnoreCase) ||
-            y.EndsWith(x + ".exe", StringComparison.OrdinalIgnoreCase) ||
-            x.StartsWith(y + ".exe", StringComparison.OrdinalIgnoreCase) ||
-            y.StartsWith(x + ".exe", StringComparison.OrdinalIgnoreCase) ||
-            x.EndsWith(y + ".dll", StringComparison.OrdinalIgnoreCase) ||
-            y.EndsWith(x + ".dll", StringComparison.OrdinalIgnoreCase) ||
-            x.StartsWith(y + ".dll", StringComparison.OrdinalIgnoreCase) ||
-            y.StartsWith(x + ".dll", StringComparison.OrdinalIgnoreCase);
-
+    public bool Equals(string? x, string? y) =>
+        x.Equals(y, StringComparison.OrdinalIgnoreCase)
+        || x.EndsWith(y + ".exe", StringComparison.OrdinalIgnoreCase)
+        || y.EndsWith(x + ".exe", StringComparison.OrdinalIgnoreCase)
+        || x.StartsWith(y + ".exe", StringComparison.OrdinalIgnoreCase)
+        || y.StartsWith(x + ".exe", StringComparison.OrdinalIgnoreCase)
+        || x.EndsWith(y + ".dll", StringComparison.OrdinalIgnoreCase)
+        || y.EndsWith(x + ".dll", StringComparison.OrdinalIgnoreCase)
+        || x.StartsWith(y + ".dll", StringComparison.OrdinalIgnoreCase)
+        || y.StartsWith(x + ".dll", StringComparison.OrdinalIgnoreCase);
 
     /// <summary>
     /// Returns a hash code for the specified object. This is used to determine whether or not a object is the same as another object in the same language.
