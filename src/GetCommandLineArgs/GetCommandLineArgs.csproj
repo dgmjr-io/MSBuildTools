@@ -11,36 +11,36 @@
 -->
 
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <OutputPath>lib/</OutputPath>
-        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-        <Description>Provides a task and a target that put the command line arguments to the MSBuild process into the items and property "CommandLineArgs."</Description>
-    </PropertyGroup>
-    <ItemGroup>
-        <PackageTag Include="commandline" />
-        <PackageTag Include="msbuild" />
-    </ItemGroup>
-    <ItemGroup>
-        <PackageReference Include="Microsoft.Build.Utilities.Core" PrivateAssets="None" />
-        <PackageReference Include="Microsoft.Build.Framework" PrivateAssets="None" />
-        <PackageReference Include="Microsoft.Build" PrivateAssets="None" />
-        <PackageReference Include="System.Runtime" />
-        <PackageReference Include="Dgmjr.MSBuild.Extensions" IncludeAssets="Compile;Runtime;Lib" ExcludeAssets="Native;Lib;Compile;Analyzers;ContentFiles" />
-    </ItemGroup>
-    <ItemGroup Label="Global Usings">
-        <Using Include="Microsoft.Build.Utilities.Task" Alias="MSBTask" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="$(MSBuildProjectDirectory)/GetCommandLineArgs.targets" PackagePath="build/GetCommandLineArgs.targets" />
-        <Content Include="$(MSBuildProjectDirectory)/$(OutputPath)**/*" PackagePath="lib/%(RecursiveDir)%(Filename)%(Extension)" Exclude="$(MSBuildProjectDirectory)/$(OutputPath)**.nupkg" />
-    </ItemGroup>
-    <PropertyGroup>
-        <GetCommandLineArgsAssemblyFile Condition="'$(MSBuildProjectName)' == 'GetCommandLineArgs'">$(MSBuildThisFileDirectory)./lib/GetCommandLineArgs.dll</GetCommandLineArgsAssemblyFile>
-        <GetCommandLineArgsAssemblyFile Condition="'$(MSBuildProjectName)' != 'GetCommandLineArgs'">$(MSBuildThisFileDirectory)../lib/GetCommandLineArgs.dll</GetCommandLineArgsAssemblyFile>
-    </PropertyGroup>
-    <UsingTask TaskName="Dgmjr.MSBuild.Tasks.GetCommandLineArgs" AssemblyFile="$(GetCommandLineArgsAssemblyFile)" />
-    <ItemGroup>
-        <Reference Include="System.Runtime" />
-    </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputPath>lib/</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Description>Provides a task and a target that put the command line arguments to the MSBuild process into the items and property "CommandLineArgs."</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageTag Include="commandline" />
+    <PackageTag Include="msbuild" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Utilities.Core" PrivateAssets="None" />
+    <PackageReference Include="Microsoft.Build.Framework" PrivateAssets="None" />
+    <PackageReference Include="Microsoft.Build" PrivateAssets="None" />
+    <PackageReference Include="System.Runtime" />
+    <ProjectReference Include="../Extensions/Dgmjr.MSBuild.Extensions.csproj" IncludeAssets="Compile;Runtime;Lib" ExcludeAssets="Native;Lib;Compile;Analyzers;ContentFiles" />
+  </ItemGroup>
+  <ItemGroup Label="Global Usings">
+    <Using Include="Microsoft.Build.Utilities.Task" Alias="MSBTask" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildProjectDirectory)/GetCommandLineArgs.targets" PackagePath="build/GetCommandLineArgs.targets" />
+    <Content Include="$(MSBuildProjectDirectory)/$(OutputPath)**/*" PackagePath="lib/%(RecursiveDir)%(Filename)%(Extension)" Exclude="$(MSBuildProjectDirectory)/$(OutputPath)**.nupkg" />
+  </ItemGroup>
+  <PropertyGroup>
+    <GetCommandLineArgsAssemblyFile Condition="'$(MSBuildProjectName)' == 'GetCommandLineArgs'">$(MSBuildThisFileDirectory)./lib/GetCommandLineArgs.dll</GetCommandLineArgsAssemblyFile>
+    <GetCommandLineArgsAssemblyFile Condition="'$(MSBuildProjectName)' != 'GetCommandLineArgs'">$(MSBuildThisFileDirectory)../lib/GetCommandLineArgs.dll</GetCommandLineArgsAssemblyFile>
+  </PropertyGroup>
+  <UsingTask TaskName="Dgmjr.MSBuild.Tasks.GetCommandLineArgs" AssemblyFile="$(GetCommandLineArgsAssemblyFile)" />
+  <ItemGroup>
+    <Reference Include="System.Runtime" />
+  </ItemGroup>
 </Project>

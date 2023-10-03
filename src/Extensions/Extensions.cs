@@ -1,7 +1,7 @@
 namespace Dgmjr.MSBuild.Extensions;
 
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
@@ -53,12 +53,14 @@ public static class TaskExtensions
         }
     }
 
-    private class ProjectPropertiesDictionary : CaseInsensitiveStringKeyDictionary
+    private class ProjectPropertiesDictionary : Dictionary<string, string>
     {
-        private readonly ProjectPropertiesDictionary _dictionary =
-            new(StringComparer.OrdinalIgnoreCase);
+        private readonly IDictionary<string, string> _dictionary = new Dictionary<string, string>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         public ProjectPropertiesDictionary(Project project)
+            : base(StringComparer.OrdinalIgnoreCase)
         {
             foreach (var property in project.AllEvaluatedProperties)
             {

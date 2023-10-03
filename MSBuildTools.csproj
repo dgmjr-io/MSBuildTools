@@ -15,9 +15,9 @@
         <IncludeInSolutionFile>false</IncludeInSolutionFile>
     </PropertyGroup>
     <ItemGroup>
-        <ProjectReference Include="./src/Dgmjr.MSBuild.Extensions/Dgmjr.MSBuild.Extensions.csproj" />
+        <ProjectReference Include="./src/Extensions/Dgmjr.MSBuild.Extensions.csproj" />
         <ProjectReference Include="./src/GetAllProperties/Dgmjr.MSBuild.Utils.GetAllProperties.csproj" />
         <ProjectReference Include="./src/GetCommandLineArgs/GetCommandLineArgs.csproj" />
-        <ProjectReference Include="./src/MSBuild.DotNetCliTask/Dgmjr.MSBuild.Tasks.DotNetCliTask.csproj" />
+        <ProjectReference Include="./src/DotNetCliTask/Dgmjr.MSBuild.Tasks.DotNetCliTask.csproj" />
     </ItemGroup>
 </Project>

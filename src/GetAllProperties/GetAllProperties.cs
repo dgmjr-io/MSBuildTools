@@ -31,7 +31,10 @@ public class GetAllProperties : MSBTask
     private string? _projectFile;
     public string ProjectFile
     {
-        get => _projectFile ??= this.TryGetProject().FullPath;
+        get =>
+            _projectFile ??= this.GetAllEvaluatedProperties()[
+                MSBuildPropertyNames.MSBuildProjectFullPath
+            ];
         set => _projectFile = value;
     }
 

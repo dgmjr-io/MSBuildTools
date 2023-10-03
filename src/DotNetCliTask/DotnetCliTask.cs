@@ -3,7 +3,6 @@ using System.Xml.Linq;
 
 namespace Dgmjr.MSBuild.Tasks;
 
-using System.Diagnostics.Metrics;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;

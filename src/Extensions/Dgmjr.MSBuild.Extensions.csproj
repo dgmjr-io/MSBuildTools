@@ -1,0 +1,38 @@
+﻿<!--
+ * Dgmjr.MSBuild.Extensions.csproj
+ *
+ *   Created: 2023-03-12-08:29:05
+ *   Modified: 2023-05-05-04:39:00
+ *
+ *   Author: David G. Moore, Jr. <david@dgmjr.io>
+ *
+ *   Copyright © 2022 - 2023 David G. Moore, Jr., All Rights Reserved
+ *      License: MIT (https://opensource.org/licenses/MIT)
+-->
+
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
+    <!-- <TargetFrameworks>netstandard2.1</TargetFrameworks> -->
+    <ImplicitUsings>true</ImplicitUsings>
+    <OutputPath>lib/</OutputPath>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <PackageId>Dgmjr.MSBuild.Extensions</PackageId>
+    <Description>This package contains the following extensions to be used with MSBuild:
+        * Dgmjr.MSBuild.Extensions -
+    </Description>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- <PackageReference Include="MSBuild.Usings" /> -->
+    <PackageReference Include="Microsoft.Build.Utilities.Core" PrivateAssets="None" />
+    <PackageReference Include="Microsoft.Build" PrivateAssets="None" />
+    <PackageReference Include="Dgmjr.System.Extensions" ExcludeAssets="ContentFiles" />
+    <PackageReference Include="System.AppDomain" Condition="$(TargetFramework.Contains('netstandard1'))" />
+    <PackageReference Include="System.Xml.ReaderWriter" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageFile Include="./lib/**/*.dll" PackagePath="lib/netstandard2.0/%(Filename)%(Extension)" />
+    <PackageFile Include="./lib/**/*.xml" PackagePath="lib/netstandard2.0/%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>

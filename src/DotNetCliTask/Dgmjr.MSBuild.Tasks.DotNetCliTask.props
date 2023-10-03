@@ -1,15 +1,18 @@
 <!--
  * MSBuild.DotNetCliTask.props
- * 
+ *
  *   Created: 2023-01-26-03:22:47
  *   Modified: 2023-01-26-03:22:47
- * 
+ *
  *   Author: David G. Moore, Jr. <david@dgmjr.io>
- *   
+ *
  *   Copyright © 2022-2023 David G. Moore, Jr., All Rights Reserved
  *      License: MIT (https://opensource.org/licenses/MIT)
 -->
 
 <Project>
   <UsingTask TaskName="Dgmjr.MSBuild.Tasks.Dotnet" AssemblyFile="$([System.IO.Path]::Combine($(MSBuildThisFileDirectory), '../lib/MSBuild.DotNetCliTask.dll'))" />
+  <ItemGroup>
+    <Using Include="System.Collections.Generic.CaseInsensitiveKeyDictionary%3cstring%3e" Alias="CaseInsensitiveStringKeyDictionary" />
+  </ItemGroup>
 </Project>

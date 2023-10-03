@@ -15,7 +15,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <PackageId>MSBuild.Extensions.GetAllProperties</PackageId>
+    <PackageId>GetAllProperties</PackageId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MSBuild.Usings" />
