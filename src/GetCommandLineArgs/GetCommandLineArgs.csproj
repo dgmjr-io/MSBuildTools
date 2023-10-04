@@ -13,8 +13,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <OutputPath>lib/</OutputPath>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <Description>Provides a task and a target that put the command line arguments to the MSBuild process into the items and property "CommandLineArgs."</Description>
   </PropertyGroup>
   <ItemGroup>
@@ -36,11 +34,22 @@
     <Content Include="$(MSBuildProjectDirectory)/$(OutputPath)**/*" PackagePath="lib/%(RecursiveDir)%(Filename)%(Extension)" Exclude="$(MSBuildProjectDirectory)/$(OutputPath)**.nupkg" />
   </ItemGroup>
   <PropertyGroup>
-    <GetCommandLineArgsAssemblyFile Condition="'$(MSBuildProjectName)' == 'GetCommandLineArgs'">$(MSBuildThisFileDirectory)./lib/GetCommandLineArgs.dll</GetCommandLineArgsAssemblyFile>
+    <GetCommandLineArgsAssemblyFile Condition="'$(MSBuildProjectName)' == 'GetCommandLineArgs'">$(MSBuildThisFileDirectory)./bin/$(Configuration)/GetCommandLineArgs.dll</GetCommandLineArgsAssemblyFile>
     <GetCommandLineArgsAssemblyFile Condition="'$(MSBuildProjectName)' != 'GetCommandLineArgs'">$(MSBuildThisFileDirectory)../lib/GetCommandLineArgs.dll</GetCommandLineArgsAssemblyFile>
   </PropertyGroup>
   <UsingTask TaskName="Dgmjr.MSBuild.Tasks.GetCommandLineArgs" AssemblyFile="$(GetCommandLineArgsAssemblyFile)" />
   <ItemGroup>
     <Reference Include="System.Runtime" />
   </ItemGroup>
+  <Target Name="ShowCommandLineArgs" Outputs="@(CommandLineArg);$(CommandLineArgs)" AfterTargets="Pack">
+    <MSBuild.Utils.GetCommandLineArgs>
+      <Output TaskParameter="CommandLineArgs" ItemName="CommandLineArgs" />
+      <Output TaskParameter="FullCommandLine" PropertyName="FullCommandLine" />
+    </MSBuild.Utils.GetCommandLineArgs>
+
+    <PropertyGroup>
+      <CommandLineArgs>@(CommandLineArgs, ' ')</CommandLineArgs>
+    </PropertyGroup>
+    <Message Importance="High" Text="CommandLineArgs: $(CommandLineArg)" />
+  </Target>
 </Project>
