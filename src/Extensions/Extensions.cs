@@ -9,6 +9,7 @@ using System.Xml;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Execution;
 using Microsoft.Build.Framework;
+using Microsoft.Build.Definition;
 
 public static class TaskExtensions
 {
@@ -29,72 +30,47 @@ public static class TaskExtensions
         var projectCollection = new ProjectCollection();
         project = projectCollection.LoadProject(projectFile);
 
-        using XmlReader projectFileReader = XmlReader.Create(projectFile);
+        using var projectFileReader = XmlReader.Create(projectFile);
         return (project ??= projectCollection.LoadProject(projectFileReader)) != null;
     }
 
     public static ICollection<ProjectItem> GetAllEvaluatedItems(this ITask task)
     {
-        var projectXml = File.ReadAllText(task.BuildEngine.ProjectFileOfTaskNode);
-        using (var xmlReader = XmlReader.Create(new StringReader(projectXml)))
-        {
-            var project = new Project(xmlReader);
-            return project.AllEvaluatedItems;
-        }
-    }
+        var projectCollection = new ProjectCollection();
+        var project = projectCollection.LoadProject(task.BuildEngine.ProjectFileOfTaskNode);
 
-    public static IDictionary<string, string> GetAllEvaluatedProperties(this ITask task)
-    {
         var projectXml = File.ReadAllText(task.BuildEngine.ProjectFileOfTaskNode);
-        using (var xmlReader = XmlReader.Create(new StringReader(projectXml)))
-        {
-            var project = new Project(xmlReader);
-            return new ProjectPropertiesDictionary(project);
-        }
-    }
-
-    private class ProjectPropertiesDictionary : Dictionary<string, string>
-    {
-        private readonly IDictionary<string, string> _dictionary = new Dictionary<string, string>(
-            StringComparer.OrdinalIgnoreCase
+        using var xmlReader = XmlReader.Create(new StringReader(projectXml));
+        project ??= Project.FromXmlReader(
+            xmlReader,
+            new ProjectOptions { ProjectCollection = projectCollection }
         );
+        return project.AllEvaluatedItems;
+    }
 
+    public static IStringDictionary GetAllEvaluatedProperties(this ITask task)
+    {
+        var projectCollection = new ProjectCollection();
+        var project = projectCollection.LoadProject(task.BuildEngine.ProjectFileOfTaskNode);
+
+        var projectXml = File.ReadAllText(task.BuildEngine.ProjectFileOfTaskNode);
+        using var xmlReader = XmlReader.Create(new StringReader(projectXml));
+        project ??= Project.FromXmlReader(
+            xmlReader,
+            new ProjectOptions { ProjectCollection = projectCollection }
+        );
+        return new ProjectPropertiesDictionary(project);
+    }
+
+    private sealed class ProjectPropertiesDictionary : StringDictionary
+    {
         public ProjectPropertiesDictionary(Project project)
             : base(StringComparer.OrdinalIgnoreCase)
         {
             foreach (var property in project.AllEvaluatedProperties)
             {
-                var propertyName = property.Name;
-                var propertyValue = property.EvaluatedValue;
-
-                this[propertyName] = propertyValue;
+                this[property.Name] = property.EvaluatedValue;
             }
         }
-
-        // public virtual string this[string key]
-        // {
-        //     get => _dictionary.TryGetValue(key, out var value) ? value : string.Empty;
-        //     set => _dictionary[key] = value;
-        // }
-
-        // public ICollection<string> Keys => _dictionary.Keys;
-
-        // public ICollection<string> Values => _dictionary.Values;
-
-        // public int Count => _dictionary.Count();
-
-        // public bool IsReadOnly => _dictionary.IsReadOnly;
-
-        // public void Add(string key, string value) => _dictionary.Add(key, value);
-        // public void Add(KeyValuePair<string, string> item) => _dictionary.Add(item);
-        // public void Clear() => _dictionary.Clear();
-        // public bool Contains(KeyValuePair<string, string> item) => _dictionary.Contains(item);
-        // public bool ContainsKey(string key) => _dictionary.ContainsKey(key);
-        // public void CopyTo(KeyValuePair<string, string>[] array, int arrayIndex) => _dictionary.CopyTo(array, arrayIndex);
-        // public IEnumerator<KeyValuePair<string, string>> GetEnumerator() => _dictionary.GetEnumerator();
-        // public bool Remove(string key) => _dictionary.Remove(key);
-        // public bool Remove(KeyValuePair<string, string> item) => _dictionary.Remove(item);
-        // public bool TryGetValue(string key, out string value) => _dictionary.TryGetValue(key, out value);
-        // IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_dictionary).GetEnumerator();
     }
 }

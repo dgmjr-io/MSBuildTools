@@ -15,7 +15,6 @@
     <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
     <!-- <TargetFrameworks>netstandard2.1</TargetFrameworks> -->
     <ImplicitUsings>true</ImplicitUsings>
-    <OutputPath>lib/</OutputPath>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
     <PackageId>Dgmjr.MSBuild.Extensions</PackageId>
     <Description>This package contains the following extensions to be used with MSBuild:
@@ -30,9 +29,5 @@
     <PackageReference Include="Dgmjr.System.Extensions" ExcludeAssets="ContentFiles" />
     <PackageReference Include="System.AppDomain" Condition="$(TargetFramework.Contains('netstandard1'))" />
     <PackageReference Include="System.Xml.ReaderWriter" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageFile Include="./lib/**/*.dll" PackagePath="lib/netstandard2.0/%(Filename)%(Extension)" />
-    <PackageFile Include="./lib/**/*.xml" PackagePath="lib/netstandard2.0/%(Filename)%(Extension)" />
   </ItemGroup>
 </Project>
