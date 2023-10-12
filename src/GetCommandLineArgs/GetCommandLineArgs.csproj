@@ -50,6 +50,6 @@
     <PropertyGroup>
       <CommandLineArgs>@(CommandLineArgs, ' ')</CommandLineArgs>
     </PropertyGroup>
-    <Message Importance="High" Text="CommandLineArgs: $(CommandLineArg)" />
+    <Message Text="CommandLineArgs: $(CommandLineArg)" />
   </Target>
 </Project>
