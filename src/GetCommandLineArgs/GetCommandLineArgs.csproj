@@ -41,15 +41,15 @@
   <ItemGroup>
     <Reference Include="System.Runtime" />
   </ItemGroup>
-  <Target Name="ShowCommandLineArgs" Outputs="@(CommandLineArg);$(CommandLineArgs)" AfterTargets="Pack">
-    <MSBuild.Utils.GetCommandLineArgs>
+  <!-- <Target Name="ShowCommandLineArgs" Outputs="@(CommandLineArg);$(CommandLineArgs)" AfterTargets="Pack">
+    <Dgmjr.MSBuild.Tasks.GetCommandLineArgs>
       <Output TaskParameter="CommandLineArgs" ItemName="CommandLineArgs" />
       <Output TaskParameter="FullCommandLine" PropertyName="FullCommandLine" />
-    </MSBuild.Utils.GetCommandLineArgs>
+    </Dgmjr.MSBuild.Tasks.GetCommandLineArgs>
 
     <PropertyGroup>
       <CommandLineArgs>@(CommandLineArgs, ' ')</CommandLineArgs>
     </PropertyGroup>
     <Message Text="CommandLineArgs: $(CommandLineArg)" />
-  </Target>
+  </Target> -->
 </Project>
